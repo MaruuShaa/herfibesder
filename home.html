@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --pink-pastel: #FFB6D9;
+            --pink-light: #FFC9E0;
+            --pink-lighter: #FFD6E8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #212529;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,182,217,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #6c757d;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .btn-custom {
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-dark-custom {
+            background: #212529;
+            color: white;
+            border: none;
+        }
+
+        .btn-dark-custom:hover {
+            background: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-pink-custom {
+            background: var(--pink-pastel);
+            color: white;
+            border: none;
+        }
+
+        .btn-pink-custom:hover {
+            background: var(--pink-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,182,217,0.3);
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--pink-pastel);
+            margin: 0 auto 2rem;
+            border-radius: 2px;
+        }
+
+        /* Section Spacing */
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        /* Message Card */
+        .message-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .message-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            color: #495057;
+            line-height: 1.8;
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #dee2e6;
+            transition: transform 0.3s ease;
+        }
+
+        .image-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        /* Gallery */
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* Surprise Section */
+        .surprise-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #212529;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .surprise-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,182,217,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+        }
+
+        /* Candles */
+        .candles-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .candles-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .candle {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .candle:hover {
+            transform: scale(1.1);
+        }
+
+        .candle-stick {
+            width: 50px;
+            height: 120px;
+            background: linear-gradient(180deg, var(--pink-lighter) 0%, var(--pink-pastel) 100%);
+            border-radius: 10px 10px 5px 5px;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(255,182,217,0.3);
+        }
+
+        .candle-top {
+            width: 50px;
+            height: 10px;
+            background: var(--pink-light);
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+        }
+
+        .wick {
+            width: 3px;
+            height: 15px;
+            background: #333;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .flame {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 40px;
+            background: radial-gradient(ellipse at center, #fff 0%, #ffeb3b 30%, #ff9800 60%, #ff5722 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.4s infinite alternate;
+            box-shadow: 0 0 20px rgba(255,235,59,0.6);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .flame.blown {
+            opacity: 0;
+            transform: translateX(-50%) scale(0);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) translateY(0); }
+            100% { transform: translateX(-50%) scale(1.08) translateY(-3px); }
+        }
+
+        /* Final Section */
+        .final-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .final-section.show {
+            opacity: 1;
+        }
+
+        .final-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #212529;
+            line-height: 1.5;
+        }
+
+        .heart {
+            color: var(--pink-pastel);
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .message-card {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .image-placeholder {
+                height: 250px;
+                font-size: 3rem;
+            }
+
+            .candles-container {
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .candle-stick {
+                width: 45px;
+                height: 100px;
+            }
+
+            .candle-top {
+                width: 45px;
+            }
+
+            .final-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content text-center">
+                <h1 class="hero-title">Happy 18th Birthday, Kalana Abigail!</h1>
+                <p class="hero-subtitle">Let's celebrating you, my love.</p>
+                <button class="btn btn-custom btn-dark-custom" onclick="scrollToSection('message')">See Your Wishes</button>
+            </div>
+        </section>
+
+        <!-- Message Section -->
+        <section id="message" class="section-padding bg-light">
+            <div class="container">
+                <div class="divider"></div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="message-card">
+                            <h2 class="section-title">Birthday Wishes</h2>
+                            <p class="section-text mb-3">Today is the day, the world without any preparation or knowledge, welcomed someone who would later become the reason i believe love can be gentle, deep, and real. Today is the day you took your first breath into this world, and somehow, years later, you walked into my life and quietly changed everything.</p>
+                            <p class="section-text mb-3">Turning 18 isn't just about getting older. It's about becoming someone new. Becoming braver with your dreams, softer with your heart, and stronger with every lesson life gives you. At this age, you stand between the past and the future, carrying all the wounds, laughter, hopes, and dreams you've kept hidden. And i want you to know, every part of you is worth loving, even the parts you think aren't.</p>
+                            <p class="section-text mb-3">I hope that in this new chapter of your life, you never settle for less than what you deserve. May you always have the courage to choose yourself, even when the world tries to make you doubt. May happiness find you in the smallest moments, and may your dreams slowly turn into realities you once whispered to the sky.</p>
+                            <p class="section-text mb-3">Thankyou for letting me love you, and for loving me back in a way that feels safe and real. With you, love doesn't feel loud, but it feels steady, warm, and true. I'm so grateful for every late-night talk, every shared silence, and every moment where our worlds quietly met.</p>
+                            <p class="section-text mb-3">No matter where life takes us, i promise to walk beside you, through growth, change, distance, and time. i'll be here celebrating your wins, holding you on your hard days, and loving you in all the versions you'll become.</p>
+                            <p class="section-text mb-0">Happy birthday to the woman who holds my heart. Eighteen is just the beginning, and i can't wait to see you shine. I love you so much my bini</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Gallery Section -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <div class="divider"></div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="section-title">HEMFY BERSDEY TU YOUWHHHH, MY KALANA MY ABEL MY KABELBUL</h2>
+                        <p class="section-text mb-4">happy happy happy</p>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <div class="gallery-item" onclick="showPhoto(1)" style="background-image: url('https://i.pinimg.com/736x/69/6c/4d/696c4dde5f7c6da635cc57803d60b6c9.jpg'); background-size: cover; background-position: center;">
+</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="gallery-item" onclick="showPhoto(2)" style="background-image: url('https://i.pinimg.com/736x/e3/34/1e/e3341e988d0e6d4f55c0bebeb1f1146b.jpg'); background-size: cover; background-position: center;">
+</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="gallery-item" onclick="showPhoto(3)" style="background-image: url('https://i.pinimg.com/736x/1b/eb/d8/1bebd8cd5fd38cc405c116f309118188.jpg'); background-size: cover; background-position: center;">
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Surprise Section
+        <section class="surprise-section section-padding text-center position-relative">
+            <div class="container position-relative" style="z-index: 2;">
+                <div class="divider"></div>
+                <h2 class="section-title">A playful surprise is waiting for you!</h2>
+                <p class="section-text text-muted">scroll kebawah dan dapatkan mini surprise dari your love.</p>
+            </div>
+        </section> -->
+
+        <!-- Candles Section -->
+        <section id="candles" class="section-padding text-center">
+            <div class="container">
+                <div class="divider"></div>
+                <h2 class="section-title">Blow Out the Candles</h2>
+                <p class="section-text mb-4">Tiyup lilin nyah tiyup lilin nyah tiyup lilinnyah right now! (click mkstny)</p>
+                <button class="btn btn-custom btn-pink-custom" onclick="showCandles()">Surprise Me 🎉</button>
+                
+                <div class="candles-container" id="candlesContainer">
+                    <div class="candle" onclick="blowCandle(0)">
+                        <div class="flame" id="flame0"></div>
+                        <div class="wick"></div>
+                        <div class="candle-top"></div>
+                        <div class="candle-stick"></div>
+                    </div>
+                    <div class="candle" onclick="blowCandle(1)">
+                        <div class="flame" id="flame1"></div>
+                        <div class="wick"></div>
+                        <div class="candle-top"></div>
+                        <div class="candle-stick"></div>
+                    </div>
+                    <div class="candle" onclick="blowCandle(2)">
+                        <div class="flame" id="flame2"></div>
+                        <div class="wick"></div>
+                        <div class="candle-top"></div>
+                        <div class="candle-stick"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Section -->
+        <section id="final" class="final-section section-padding text-center">
+            <div class="container">
+                <h2 class="final-title">
+                    Wishing you endless happiness and the fulfillment of all your hopes, sayangku<br>
+                    Once again, Happy 18th Birthday my bini <span class="heart">❤️</span>
+                </h2>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Show candles with animation
+        function showCandles() {
+            const container = document.getElementById('candlesContainer');
+            container.classList.add('show');
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            createConfetti(30);
+        }
+
+        // Blow candle
+        let candlesBlown = 0;
+        function blowCandle(index) {
+            const flame = document.getElementById('flame' + index);
+            
+            if (!flame.classList.contains('blown')) {
+                flame.classList.add('blown');
+                candlesBlown++;
+                createConfetti(15);
+                
+                if (candlesBlown === 3) {
+                    setTimeout(() => {
+                        createConfetti(80);
+                        document.getElementById('final').classList.add('show');
+                        document.getElementById('final').scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 500);
+                }
+            }
+        }
+
+        // Show photo
+        function showPhoto(num) {
+            alert(`📸 Beautiful Memory ${num}\n\nA special cute picture captured!`);
+        }
+
+        // Create confetti
+        function createConfetti(count) {
+            const colors = ['#FFB6D9', '#FFC9E0', '#FFD6E8', '#212529', '#6c757d'];
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    // Animate confetti
+                    const duration = Math.random() * 2000 + 2000;
+                    const rotation = Math.random() * 360;
+                    
+                    confetti.animate([
+                        { 
+                            transform: 'translateY(0) rotate(0deg)',
+                            opacity: 1
+                        },
+                        { 
+                            transform: `translateY(${window.innerHeight + 100}px) rotate(${rotation}deg)`,
+                            opacity: 0
+                        }
+                    ], {
+                        duration: duration,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+                    
+                    setTimeout(() => confetti.remove(), duration);
+                }, i * 50);
+            }
+        }
+
+        // Scroll animations with Intersection Observer
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.message-card, .gallery-item');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
